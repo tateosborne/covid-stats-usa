@@ -6,9 +6,12 @@ def parse_word(string, num_word):
         while (hit_space == False):
             letter = 
             out_string +=
+def test_push:
+    print("I Made a change")
 
     hit_space = False:
 if __name__ == '__main__':
     running = True; #Variable to hold whether the user wants to be playing.
     while running:
         user_input = input('Enter your Query: ')
+
