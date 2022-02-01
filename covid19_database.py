@@ -16,18 +16,19 @@ def create_connection(db_file):
         # Table parameters are county, state, deaths
         c.execute('''
             CREATE TABLE IF NOT EXISTS County_Data 
-            ([county] TEXT, [state] TEXT, [cases] INTEGER PRIMARY KEY, [deaths] INTEGER PRIMARY KEY)
+            ([county] TEXT, [state] TEXT, [cases] INTEGER, [deaths] INTEGER)
         ''')
 
         # Create the table of state statistics
         # Table parameters are state, cases, deaths
         c.execute('''
             CREATE TABLE IF NOT EXISTS State_Data
-            ([state] TEXT, [cases] INTEGER PRIMARY KEY, [deaths] INTEGER PRIMARY KEY)
+            ([state] TEXT, [cases] INTEGER, [deaths] INTEGER)
         ''')
         conn.commit()
     # If there is an error, display which one
     except Error as e:
+        print("Error Raised")
         print(e)
     finally:
         if conn:
@@ -47,7 +48,9 @@ def insert_values(db_file, county_csv, state_csv):
         # them into the table
         infile_county = open(county_csv, 'r')
         for line in infile_county:
+            line = line.rstrip('\n')
             split_str = line.split(',')
+            print(split_str)
             c.execute('''
                 INSERT INTO County_Data (county, state, cases, deaths)
                 
@@ -60,6 +63,7 @@ def insert_values(db_file, county_csv, state_csv):
         # Repeat for the state csv_file
         infile_state = open(state_csv, 'r')
         for line in infile_state:
+            line = line.rstrip('\n')
             split_str = line.split(',')
             c.execute('''
                     INSERT INTO State_Data (state, cases, deaths)
@@ -72,9 +76,11 @@ def insert_values(db_file, county_csv, state_csv):
 
     # If there is an error, display which one
     except Error as e:
+        print("Error Raised")
         print(e)
     finally:
         if conn:
             conn.close()
 if __name__ == '__main__':
-    create_connection()
+    create_connection("test_database")
+    insert_values("Test Database", 'county_data.csv', 'state_data.csv')
