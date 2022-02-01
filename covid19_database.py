@@ -1,5 +1,7 @@
 import sqlite3
 from sqlite3 import Error
+import pandas as pd
+
 
 # This function connects to an SQLite database 'db_file'
 def create_connection(db_file):
@@ -32,6 +34,7 @@ def create_connection(db_file):
     finally:
         if conn:
             conn.close()
+
 
 # This function executes data entry from a csv file, line by line, into the database
 # Previously created. This allows us to adjust data and re-enter it, so long as
@@ -77,6 +80,7 @@ def insert_values(db_file, county_csv, state_csv):
         if conn:
             conn.close()
 
+
 # this function will take in the input from parser and format into a SQL query
 def make_queries(query: str) -> str:
     key_words = query.split()
@@ -103,16 +107,27 @@ def make_queries(query: str) -> str:
         elif key_words[0] == "mortality":
             pass
 
-
     return formatted_query
+
 
 # use formatted_query to gather the data to print to console
 def retrieve_data(db_file: str, query: str) -> str:
-    data = ""
 
+    # conn represents the database
+    conn = sqlite3.connect(db_file)
+    print(sqlite3.version)
+
+    # Retrieve data from the desired table
+    c = conn.cursor()
     c.execute(query)
 
-    return data
+    data_str = ""
+    data_list = c.fetchall()
+    for d in data_list:
+        data_str += d
+
+    return data_str
+
 
 if __name__ == '__main__':
     create_connection("test_database")
