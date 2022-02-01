@@ -115,4 +115,5 @@ def retrieve_data(db_file: str, query: str) -> str:
     return data
 
 if __name__ == '__main__':
-    create_connection()
+    create_connection("test_database")
+    insert_values("Test Database", 'county_data.csv', 'state_data.csv')
