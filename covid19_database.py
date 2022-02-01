@@ -1,7 +1,5 @@
 import sqlite3
 from sqlite3 import Error
-import pandas as pd
-
 
 # This function connects to an SQLite database 'db_file'
 def create_connection(db_file):
@@ -30,6 +28,7 @@ def create_connection(db_file):
         conn.commit()
     # If there is an error, display which one
     except Error as e:
+        print("Error Raised in Create Connection")
         print(e)
     finally:
         if conn:
@@ -50,31 +49,44 @@ def insert_values(db_file, county_csv, state_csv):
         # them into the table
         infile_county = open(county_csv, 'r')
         for line in infile_county:
+            line = line.rstrip("\n")
+            line = line.rstrip(line[-1])
             split_str = line.split(',')
-            c.execute('''
-                INSERT INTO County_Data (county, state, cases, deaths)
-                
-                    VALUES
-                    (split_str[0], split_str[1], int(split_str[2]), int(split_str[3]))
-            ''')
+            print(split_str)
+            county_formatted = split_str[0]
+            state_formatted = split_str[1]
+            cases_formatted = int(split_str[2])
+            deaths_formatted = int(split_str[2])
+            insert_with_param = '''INSERT INTO County_Data (county, state, cases, deaths) 
+                    VALUES (?, ?, ?, ?)'''
+            data_tuple = (county_formatted, state_formatted, cases_formatted, deaths_formatted)
+            c.execute(insert_with_param, data_tuple)
+            conn.commit()
         # Close the file
         infile_county.close()
 
         # Repeat for the state csv_file
         infile_state = open(state_csv, 'r')
         for line in infile_state:
+            line = line.rstrip("\n")
+            line = line.rstrip(line[-1])
             split_str = line.split(',')
-            c.execute('''
-                    INSERT INTO State_Data (state, cases, deaths)
+            print(split_str)
+            state_formatted = split_str[0]
+            cases_formatted = int(split_str[1])
+            deaths_formatted = int(split_str[2])
+            insert_with_param = '''INSERT INTO State_Data (state, cases, deaths)
+                        VALUES (?, ?, ?)'''
+            data_tuple = (state_formatted, cases_formatted, deaths_formatted)
+            c.execute(insert_with_param, data_tuple)
+            conn.commit()
 
-                        VALUES
-                        (split_str[0], int(split_str[1]), int(split_str[2]),)
-                    ''')
         # Close the file
         infile_state.close()
 
     # If there is an error, display which one
     except Error as e:
+        print("Error Raised in Insert Values")
         print(e)
     finally:
         if conn:
@@ -133,4 +145,4 @@ def retrieve_data(db_file: str, query: str) -> str:
 
 if __name__ == '__main__':
     create_connection("test_database")
-    insert_values("Test Database", 'county_data.csv', 'state_data.csv')
+    insert_values("test_database", 'county_data.csv', 'state_data.csv')
