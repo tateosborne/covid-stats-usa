@@ -124,7 +124,9 @@ def retrieve_data(db_file: str, query: str) -> str:
     data_str = ""
     data_list = c.fetchall()
     for d in data_list:
-        data_str += d
+        data_str += (d + " ")
+
+    c.close()
 
     return data_str
 
