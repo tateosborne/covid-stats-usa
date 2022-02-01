@@ -1,6 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 
+# we can remove this comment, just testing commits.
+
 def create_connection(db_file):
     conn = None
     try:
