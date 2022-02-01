@@ -3,7 +3,7 @@ def help_user():
     print("Start with the data you're trying to find.\n")
     print("cases - deaths - mortality\n")
     print("Then, chose how broad of a scope you want the data.")
-    print("total - state + Abbreviation")
+    print("total - state [abbreviation]")
     print("Then finally, if you want to search for a specific county, name it.")
     print("NOTE: it is possible to just search for state data, and not county data.")
     print("County [name]\n")
