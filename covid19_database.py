@@ -107,8 +107,10 @@ def make_queries(query: str) -> str:
     return formatted_query
 
 # use formatted_query to gather the data to print to console
-def retrieve_data(query: str) -> str:
+def retrieve_data(db_file: str, query: str) -> str:
     data = ""
+
+    c.execute(query)
 
     return data
 
