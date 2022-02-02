@@ -6,7 +6,7 @@ def get_query_data(user_input_list, error):
     state = ""
     county = ""
     if user_input_list[1] == 'total':
-        # TODO WRITE TOTAL function
+        # TODO WRITE TOTAL function AAAAA
     if user_input_list[1] == 'state':
         if user_input_list[2].len == 2:
             state = user_input_list[2]
