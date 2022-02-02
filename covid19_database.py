@@ -57,7 +57,7 @@ def insert_values(db_file, county_csv, state_csv):
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO County_Data (county, state, cases, deaths) 
+            insert_with_param = '''INSERT INTO county_data (county, state, cases, deaths) 
                     VALUES (?, ?, ?, ?)'''
             data_tuple = (county_formatted, state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
@@ -74,7 +74,7 @@ def insert_values(db_file, county_csv, state_csv):
             state_formatted = split_str[0]
             cases_formatted = int(split_str[1])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO State_Data (state, cases, deaths)
+            insert_with_param = '''INSERT INTO state_data (state, cases, deaths)
                         VALUES (?, ?, ?)'''
             data_tuple = (state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
