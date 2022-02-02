@@ -53,7 +53,6 @@ def insert_values(db_file, county_csv, state_csv):
             line = line.rstrip("\n")
             line = line.rstrip(line[-1])
             split_str = line.split(',')
-            print(split_str)
             county_formatted = split_str[0]
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
@@ -72,7 +71,6 @@ def insert_values(db_file, county_csv, state_csv):
             line = line.rstrip("\n")
             line = line.rstrip(line[-1])
             split_str = line.split(',')
-            print(split_str)
             state_formatted = split_str[0]
             cases_formatted = int(split_str[1])
             deaths_formatted = int(split_str[2])
@@ -143,6 +141,6 @@ def retrieve_data(db_file: str, query: str) -> str:
     return data_str
 
 
-if __name__ == '__main__':
-    create_connection("test_database")
-    insert_values("test_database", 'county_data.csv', 'state_data.csv')
+# def main():
+#     create_connection("test_database")
+#     insert_values("test_database", 'county_data.csv', 'state_data.csv')
