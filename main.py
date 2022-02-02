@@ -3,7 +3,18 @@ import covid19_database
 from os.path import exists
 def get_query_data(user_input_list, error):
     datatype = user_input_list[0]
-    if user_input_list[]
+    state = ""
+    county = ""
+    if user_input_list[1] == 'total':
+        # TODO WRITE TOTAL function
+    if user_input_list[1] == 'state':
+        if user_input_list[2].len == 2:
+            state = user_input_list[2]
+        if user_input_list.len >= 4: # meaning asking for county
+            if user_input_list[3] == 'county':
+                for i in range(2, user_input_list.len):
+                    county += user_input_list + " "
+
 def get_input(user_input_list):
     input_size = len(user_input_list)
     error = True
