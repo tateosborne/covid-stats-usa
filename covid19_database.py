@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+
 # This function connects to an SQLite database 'db_file'
 def create_connection(db_file):
     conn = None
@@ -124,7 +125,6 @@ def make_queries(query: str) -> str:
 
 # use formatted_query to gather the data to print to console
 def retrieve_data(db_file: str, query: str) -> str:
-
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
