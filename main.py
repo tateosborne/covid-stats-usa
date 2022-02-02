@@ -10,10 +10,15 @@ def get_query_data(user_input_list, error):
     if user_input_list[1] == 'state':
         if user_input_list[2].len == 2:
             state = user_input_list[2]
-        if user_input_list.len >= 4: # meaning asking for county
+        if user_input_list.len >= 5: # meaning asking for county
             if user_input_list[3] == 'county':
-                for i in range(2, user_input_list.len):
-                    county += user_input_list + " "
+                for i in range(4, user_input_list.len):
+                    county += user_input_list[i] + " "
+                    error = False
+        elif user_input_list.len == 3:
+            error = False
+    if error == False:
+        covid19_database.make_queries(datatype, state, county)
 
 def get_input(user_input_list):
     input_size = len(user_input_list)
@@ -26,10 +31,9 @@ def get_input(user_input_list):
 
     elif user_input_list[0] == 'quit':
         quit()
-
+        running = False
     elif user_input_list[0] == 'date':
         print("Our data was collected on 2/18/2021")
-
     elif user_input_list[0] == 'load' and user_input_list[1] == 'data':
         if exists()
         print('Loading data...')
@@ -56,9 +60,6 @@ if __name__ == '__main__':
         user_input = input('Enter your Query: ')
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
-
-
-
         get_input(user_input_list)
 
 
