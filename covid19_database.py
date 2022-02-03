@@ -102,7 +102,7 @@ def insert_values():
 
 
 # this function will take in the input arguments from parser and format into a SQL query
-def make_queries(datatype: str, state: str, county: str) -> str:
+def make_queries(state: str, county: str, cases: int, mortality: float) -> str:
 
     formatted_query = ""
 
@@ -115,7 +115,7 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
 
 # use formatted_query to gather the data to print to console
-def retrieve_data(db_file: str, query: str) -> str:
+def retrieve_data(query: str) -> str:
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
