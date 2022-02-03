@@ -103,31 +103,15 @@ def insert_values():
 
 # this function will take in the input arguments from parser and format into a SQL query
 def make_queries(datatype: str, state: str, county: str) -> str:
-    key_words = query.split()
+
     formatted_query = ""
 
-    # load data
-    if key_words[0] == "load" and key_words[1] == "data":
-        pass
+    if datatype is not None and state is None and county is None:
+        formatted_query = "SELECT " + datatype + " FROM states_data"
 
-    # system commands
-    elif len(key_words) == 1:
-        pass
+    elif
 
-    # nation-wide commands
-    elif key_words[1] == "total":
-        pass
 
-    # general commands
-    else:
-        if key_words[0] == "cases":
-            pass
-        elif key_words[0] == "deaths":
-            pass
-        elif key_words[0] == "mortality":
-            pass
-
-    return formatted_query
 
 
 # use formatted_query to gather the data to print to console
