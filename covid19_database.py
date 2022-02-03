@@ -117,6 +117,8 @@ def make_queries(state: str, county: str, cases: int, mortality: float) -> str:
 
 # use formatted_query to gather the data to print to console
 def retrieve_data(query: str) -> str:
+
+    db_file = "test_database"
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
