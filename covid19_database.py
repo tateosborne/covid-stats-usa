@@ -92,8 +92,8 @@ def insert_values(db_file, county_csv, state_csv):
             conn.close()
 
 
-# this function will take in the input from parser and format into a SQL query
-def make_queries(query: str) -> str:
+# this function will take in the input arguments from parser and format into a SQL query
+def make_queries(datatype: str, state: str, county: str) -> str:
     key_words = query.split()
     formatted_query = ""
 
