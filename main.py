@@ -1,12 +1,13 @@
 import system_calls
 import covid19_database
 from os.path import exists
+
 def get_query_data(user_input_list, error):
     datatype = user_input_list[0]
     state = ""
     county = ""
     if user_input_list[1] == 'total':
-        # TODO WRITE TOTAL function AAAA
+        # TODO WRITE TOTAL function AAAAA
     if user_input_list[1] == 'state':
         if user_input_list[2].len == 2:
             state = user_input_list[2]
@@ -35,11 +36,10 @@ def get_input(user_input_list):
     elif user_input_list[0] == 'date':
         print("Our data was collected on 2/18/2021")
     elif user_input_list[0] == 'load' and user_input_list[1] == 'data':
-        if exists()
-        print('Loading data...')
-
-        covid19_database.insert_values('covid_data', 'county_data.csv', 'state_data.csv')
-        print('Done!')
+        if exists('covid_data.db'):
+            print('Loading data...')
+            covid19_database.insert_values('covid_data', 'county_data.csv', 'state_data.csv')
+            print('Done!')
 
     # acutal parsing here
 
