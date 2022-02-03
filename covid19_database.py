@@ -106,10 +106,11 @@ def make_queries(state: str, county: str, cases: int, mortality: float) -> str:
 
     formatted_query = ""
 
-    if datatype is not None and state is None and county is None:
+    if state is None and county is None:
         formatted_query = "SELECT " + datatype + " FROM states_data"
 
-    elif
+    elif county is None:
+        formatted_query = "SELECT " + datatype + "FROM state_data"
 
 
 
