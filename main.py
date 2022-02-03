@@ -21,7 +21,7 @@ def get_query_data(user_input_list, error):
     if error == False:
         covid19_database.make_queries(datatype, state, county)
 
-def get_input(user_input_list):
+def get_input(user_input_list, loaded):
     input_size = len(user_input_list)
     error = True
     if user_input_list[0] == 'cases' or user_input_list[0] == 'deaths' or user_input_list[0] == 'mortality':
@@ -55,11 +55,11 @@ if __name__ == '__main__':
     print("Welcome to our COVID data searcher!")
     print('Type "load data" if this is your first time running this.')
     print('Type "help" for a how-to guide on structuring queries.\n')
-
+    loaded = False
     while running:
         user_input = input('Enter your Query: ')
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
-        get_input(user_input_list)
+        print(get_input(user_input_list, loaded))
 
 
