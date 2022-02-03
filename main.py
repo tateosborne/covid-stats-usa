@@ -1,12 +1,13 @@
 import system_calls
 import covid19_database
 from os.path import exists
+
 def get_query_data(user_input_list, error):
     datatype = user_input_list[0]
     state = ""
     county = ""
     if user_input_list[1] == 'total':
-        # TODO WRITE TOTAL function AAAA
+        # TODO WRITE TOTAL function AAAAA
     if user_input_list[1] == 'state':
         if user_input_list[2].len == 2:
             state = user_input_list[2]
@@ -20,7 +21,7 @@ def get_query_data(user_input_list, error):
     if error == False:
         covid19_database.make_queries(datatype, state, county)
 
-def get_input(user_input_list):
+def get_input(user_input_list, loaded):
     input_size = len(user_input_list)
     error = True
     if user_input_list[0] == 'cases' or user_input_list[0] == 'deaths' or user_input_list[0] == 'mortality':
@@ -35,11 +36,10 @@ def get_input(user_input_list):
     elif user_input_list[0] == 'date':
         print("Our data was collected on 2/18/2021")
     elif user_input_list[0] == 'load' and user_input_list[1] == 'data':
-        if exists()
-        print('Loading data...')
-
-        covid19_database.insert_values('covid_data', 'county_data.csv', 'state_data.csv')
-        print('Done!')
+        if exists('covid_data.db'):
+            print('Loading data...')
+            covid19_database.insert_values('covid_data', 'county_data.csv', 'state_data.csv')
+            print('Done!')
 
     # acutal parsing here
 
@@ -55,11 +55,11 @@ if __name__ == '__main__':
     print("Welcome to our COVID data searcher!")
     print('Type "load data" if this is your first time running this.')
     print('Type "help" for a how-to guide on structuring queries.\n')
-
+    loaded = False
     while running:
         user_input = input('Enter your Query: ')
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
-        get_input(user_input_list)
+        print(get_input(user_input_list, loaded))
 
 
