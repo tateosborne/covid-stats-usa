@@ -3,10 +3,10 @@ from sqlite3 import Error
 
 
 # This function connects to an SQLite database 'db_file'
-def create_connection(db_file):
-
+def create_connection():
     # Variable declaration/definition
     db_file = "test_database"
+
     conn = None
     try:
         # conn represents the database
@@ -102,36 +102,23 @@ def insert_values():
 
 
 # this function will take in the input arguments from parser and format into a SQL query
-def make_queries(datatype: str, state: str, county: str) -> str:
-    key_words = query.split()
+def make_queries(state: str, county: str, cases: int) -> str:
+
     formatted_query = ""
 
-    # load data
-    if key_words[0] == "load" and key_words[1] == "data":
-        pass
+    if state is None and county is None:
+        formatted_query = "SELECT " + datatype + " FROM states_data"
 
-    # system commands
-    elif len(key_words) == 1:
-        pass
+    elif county is None:
+        formatted_query = "SELECT " + datatype + "FROM state_data"
 
-    # nation-wide commands
-    elif key_words[1] == "total":
-        pass
 
-    # general commands
-    else:
-        if key_words[0] == "cases":
-            pass
-        elif key_words[0] == "deaths":
-            pass
-        elif key_words[0] == "mortality":
-            pass
-
-    return formatted_query
 
 
 # use formatted_query to gather the data to print to console
-def retrieve_data(db_file: str, query: str) -> str:
+def retrieve_data(query: str) -> str:
+
+    db_file = "test_database"
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
@@ -153,3 +140,5 @@ def retrieve_data(db_file: str, query: str) -> str:
 # def main():
 #     create_connection()
 #     insert_values()
+
+# main()

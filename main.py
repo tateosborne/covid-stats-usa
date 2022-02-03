@@ -17,6 +17,20 @@ def get_input(user_input_list, loaded):
     elif loaded:
         if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
 
+
+def get_state(user_input_data):
+    if not len(user_input_data[2]) == 2:
+        return
+
+def get_county(user_input_list):
+    county = ""
+    for i in range (4, len(user_input_list)):
+        if i == 4:
+            county = user_input_list[i]
+        else:
+            county += " "+user_input_list[i]
+    return county
+
 if __name__ == '__main__':
     running = True #Variable to hold whether the user wants to be playing.
 
