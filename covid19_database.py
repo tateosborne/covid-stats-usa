@@ -102,7 +102,7 @@ def insert_values():
 
 
 # this function will take in the input arguments from parser and format into a SQL query
-def make_queries(state: str, county: str, cases: int, mortality: float) -> str:
+def make_queries(state: str, county: str, cases: int) -> str:
 
     formatted_query = ""
 
