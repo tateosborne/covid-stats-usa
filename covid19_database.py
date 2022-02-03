@@ -3,10 +3,10 @@ from sqlite3 import Error
 
 
 # This function connects to an SQLite database 'db_file'
-def create_connection(db_file):
-
+def create_connection():
     # Variable declaration/definition
     db_file = "test_database"
+
     conn = None
     try:
         # conn represents the database
@@ -153,3 +153,5 @@ def retrieve_data(db_file: str, query: str) -> str:
 # def main():
 #     create_connection()
 #     insert_values()
+
+# main()
