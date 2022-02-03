@@ -4,6 +4,9 @@ from sqlite3 import Error
 
 # This function connects to an SQLite database 'db_file'
 def create_connection(db_file):
+
+    # Variable declaration/definition
+    db_file = "test_database"
     conn = None
     try:
         # conn represents the database
@@ -39,7 +42,13 @@ def create_connection(db_file):
 # This function executes data entry from a csv file, line by line, into the database
 # Previously created. This allows us to adjust data and re-enter it, so long as
 # The CSV file format follows that of the DB credentials in the above method
-def insert_values(db_file, county_csv, state_csv):
+def insert_values():
+
+    # Variable declaration/definitions
+    db_file = "test_database"
+    county_csv = 'county_data.csv'
+    state_csv = 'state_data.csv'
+
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -142,5 +151,5 @@ def retrieve_data(db_file: str, query: str) -> str:
 
 
 # def main():
-#     create_connection("test_database")
-#     insert_values("test_database", 'county_data.csv', 'state_data.csv')
+#     create_connection()
+#     insert_values()
