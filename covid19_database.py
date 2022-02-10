@@ -20,14 +20,14 @@ def create_connection():
         # Table parameters are county, state, deaths
         c.execute('''
             CREATE TABLE IF NOT EXISTS County_Data 
-            ([county] TEXT, [state] TEXT, [cases] INTEGER PRIMARY KEY, [deaths] INTEGER PRIMARY KEY)
+            ([county] TEXT, [state] TEXT, [cases] INTEGER, [deaths] INTEGER)
         ''')
 
         # Create the table of state statistics
         # Table parameters are state, cases, deaths
         c.execute('''
             CREATE TABLE IF NOT EXISTS State_Data
-            ([state] TEXT, [cases] INTEGER PRIMARY KEY, [deaths] INTEGER PRIMARY KEY)
+            ([state] TEXT, [cases] INTEGER, [deaths] INTEGER)
         ''')
         conn.commit()
     # If there is an error, display which one
