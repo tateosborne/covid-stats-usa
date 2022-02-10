@@ -5,7 +5,7 @@ from sqlite3 import Error
 # This function connects to an SQLite database 'db_file'
 def create_connection():
     # Variable declaration/definition
-    db_file = "test_database"
+    db_file = "covid_data.db"
 
     conn = None
     try:
@@ -45,7 +45,7 @@ def create_connection():
 def insert_values():
 
     # Variable declaration/definitions
-    db_file = "test_database"
+    db_file = "covid_data.db"
     county_csv = 'county_data.csv'
     state_csv = 'state_data.csv'
 
@@ -120,6 +120,7 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
 # use formatted_query to gather the data to print to console
 def retrieve_data(query: str) -> str:
+    db_file = "covid_data.db"
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
