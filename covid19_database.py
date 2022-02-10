@@ -106,12 +106,15 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     formatted_query = ""
 
+    # Total
     if state is None and county is None:
         formatted_query = "SELECT " + datatype + " FROM states_data"
 
+    # state
     elif county is None:
         formatted_query = "SELECT " + datatype + " FROM state_data WHERE state=" + state
 
+    # county
     elif state is not None and county is not None:
         formatted_query = "SELECT " + datatype + " FROM county_data WHERE state=" + state + " AND county=" + county
 
@@ -123,7 +126,7 @@ def retrieve_data(query: str) -> str:
     db_file = "covid_data.db"
     # conn represents the database
     conn = sqlite3.connect(db_file)
-    print(sqlite3.version)
+    # print(sqlite3.version)
 
     # Retrieve data from the desired table
     c = conn.cursor()

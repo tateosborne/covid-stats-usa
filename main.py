@@ -1,6 +1,8 @@
 import system_calls
 import covid19_database
 from os.path import exists
+
+
 def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
@@ -25,9 +27,10 @@ def get_input(user_input_list, loaded):
 
 def get_state(user_input_list) -> str:
     state = user_input_list[2]
-    if len(state) == 2:
+    if not len(state) == 2:
         return 'State input should be in Abbreviated form (i.e. VT)'
     return state
+
 def get_county(user_input_list) -> str:
     county = ""
     for i in range (4, len(user_input_list)):
@@ -35,7 +38,11 @@ def get_county(user_input_list) -> str:
             county = user_input_list[i]
         else:
             county += " "+user_input_list[i]
+    if county == "":
+        return None
     return county
+
+def get_output():
 
 if __name__ == '__main__':
     running = True #Variable to hold whether the user wants to be playing.
