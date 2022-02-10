@@ -66,7 +66,7 @@ def insert_values():
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO county_data (county, state, cases, deaths) 
+            insert_with_param = '''INSERT INTO county_data (county, state_name, cases, deaths) 
                     VALUES (?, ?, ?, ?)'''
             data_tuple = (county_formatted, state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
@@ -83,7 +83,7 @@ def insert_values():
             state_formatted = split_str[0]
             cases_formatted = int(split_str[1])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO state_data (state, cases, deaths)
+            insert_with_param = '''INSERT INTO state_data (state_name, cases, deaths)
                         VALUES (?, ?, ?)'''
             data_tuple = (state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
@@ -141,9 +141,17 @@ def retrieve_data(query: str) -> str:
 
     return data_str
 
+def print_db():
+    db_file = "covid_data.db"
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
 
-# def main():
-#     create_connection()
-#     insert_values()
+    cur.execute("SELECT * FROM County_Data")
+    print(cur.fetchall())
 
-# main()
+def main():
+    create_connection()
+    insert_values()
+    print_db()
+
+main()
