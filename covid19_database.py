@@ -107,16 +107,16 @@ def make_queries(datatype: str, state: str, county: str) -> str:
     formatted_query = ""
 
     # Total
-    if state is None and county is None:
+    if state == "" and county == "":
         formatted_query = "SELECT " + datatype + " FROM states_data"
 
     # state
-    elif county is None:
-        formatted_query = "SELECT " + datatype + " FROM state_data WHERE state_name=" + state
+    elif county == "":
+        formatted_query = "SELECT " + datatype + " FROM state_data WHERE state_name='" + state + "'"
 
     # county
-    elif state is not None and county is not None:
-        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state_name=" + state + " AND county=" + county
+    elif state != "" and county != "":
+        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state_name='" + state + "' AND county=" + county
 
     return retrieve_data(formatted_query)
 
@@ -135,11 +135,11 @@ def retrieve_data(query: str) -> str:
     data_str = ""
     data_list = c.fetchall()
     for d in data_list:
-        data_str += (d + " ")
-
+        data_str += (str(d) + " ")
     c.close()
 
     return data_str
+
 
 def print_db():
     db_file = "covid_data.db"
@@ -148,10 +148,3 @@ def print_db():
 
     cur.execute("SELECT * FROM County_Data")
     print(cur.fetchall())
-
-def main():
-    create_connection()
-    insert_values()
-    print_db()
-
-main()

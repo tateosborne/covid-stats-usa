@@ -10,12 +10,14 @@ def get_input(user_input_list, loaded):
 
     # system calls
     if user_input_list[0] == 'load':
-        if exists('covid_data.db'):
+        if not exists('covid_data.db'):
             print('Loading data...')
             covid19_database.create_connection()
             covid19_database.insert_values()
             loaded = True
             return "Done"
+        else:
+            return "Database is already Loaded"
     elif user_input_list[0] == 'quit':
         print('Quitting')
         quit()
@@ -25,11 +27,11 @@ def get_input(user_input_list, loaded):
         print("Our data was collected on 2/18/21")
 
     elif len(user_input_list) >= 1:
-        if (user_input_list[0] in {'cases', 'deaths', 'mortality'}) & (exists(user_input_list[1])):
+        if user_input_list[0] in {'cases', 'deaths', 'mortality'}:
             datatype = user_input_list[0]
             if user_input_list[1] == 'total':
                 return covid19_database.make_queries(datatype, "", "")
-            elif len(user_input_list) == 2:
+            elif len(user_input_list) == 3:
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), "")
             elif len(user_input_list) > 4:
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), get_county(user_input_list))
@@ -76,3 +78,4 @@ if __name__ == '__main__':
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
         print(get_input(user_input_list, loaded))
+
