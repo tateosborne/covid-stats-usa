@@ -53,7 +53,7 @@ def get_county(user_input_list) -> str:
     # default value for county
     county = ""
     # runs through user_input_list from start of county name to end of list
-    for i in range(4, len(user_input_list)-1):
+    for i in range(4, len(user_input_list)):
         # for first part of county, no space for separation, but there is for rest
         if i == 4:
             county = user_input_list[i]
@@ -64,7 +64,6 @@ def get_county(user_input_list) -> str:
         print("Invalid county specified")
         return ""
     return county
-
 
 if __name__ == '__main__':
     running = True  # Variable to hold whether the user wants to be playing.

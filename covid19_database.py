@@ -116,8 +116,8 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # county
     elif state != "" and county != "":
-        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state_name='" + state + "' AND county=" + county
-
+        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state_name='" + state + "' AND county='" + county + "'"
+        formatted_query.encode('unicode_escape')
     return retrieve_data(formatted_query)
 
 
