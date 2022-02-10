@@ -5,6 +5,7 @@ def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
     county = ""
+    ## TODO process help
     if user_input_list[0] == 'load' and user_input_list[1] == 'data':
         if exists('covid_data.db'):
             print('Loading data...')
@@ -18,16 +19,15 @@ def get_input(user_input_list, loaded):
         if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
             if user_input_list[1] == 'total':
                 return covid19_database.make_queries(user_input_list[0], None, None)
-            else:
+            elif len(user_input_list) == 2:
 
 
 
 def get_state(user_input_list) -> str:
     state = user_input_list[2]
-    if not len(state) == 2:
-        return 'False'
+    if len(state) == 2:
+        return 'State input should be in Abbreviated form (i.e. VT)'
     return state
-
 def get_county(user_input_list) -> str:
     county = ""
     for i in range (4, len(user_input_list)):
