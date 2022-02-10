@@ -7,6 +7,8 @@ def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
     county = ""
+
+    # system calls
     if user_input_list[0] == 'load':
         if exists('covid_data.db'):
             print('Loading data...')
@@ -17,7 +19,12 @@ def get_input(user_input_list, loaded):
     elif user_input_list[0] == 'quit':
         print('Quitting')
         quit()
-    elif loaded:
+    elif user_input_list[0] == 'help':
+        system_calls.help_user()
+    elif user_input_list[0] == 'date':
+        print("Our data was collected on 2/18/21")
+
+    elif len(user_input_list) >= 1:
         if (user_input_list[0] in {'cases', 'deaths', 'mortality'}) & (exists(user_input_list[1])):
             datatype = user_input_list[0]
             if user_input_list[1] == 'total':
