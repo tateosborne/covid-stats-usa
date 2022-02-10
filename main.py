@@ -16,6 +16,10 @@ def get_input(user_input_list, loaded):
         quit()
     elif loaded:
         if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
+            if user_input_list[1] == 'total':
+                return covid19_database.make_queries(user_input_list[0], None, None)
+            else:
+
 
 
 def get_state(user_input_list) -> str:
