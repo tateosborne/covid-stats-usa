@@ -1,47 +1,64 @@
 import system_calls
 import covid19_database
 from os.path import exists
+
+
 def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
     county = ""
-    if user_input_list[0] == 'load' and user_input_list[1] == 'data':
+
+    # system calls
+    if user_input_list[0] == 'load':
         if exists('covid_data.db'):
             print('Loading data...')
+            covid19_database.create_connection()
             covid19_database.insert_values()
-            print('Done!')
             loaded = True
+            return "Done"
     elif user_input_list[0] == 'quit':
         print('Quitting')
         quit()
-    elif loaded:
-        if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
+    elif user_input_list[0] == 'help':
+        system_calls.help_user()
+    elif user_input_list[0] == 'date':
+        print("Our data was collected on 2/18/21")
+
+    elif len(user_input_list) >= 1:
+        if (user_input_list[0] in {'cases', 'deaths', 'mortality'}) & (exists(user_input_list[1])):
+            datatype = user_input_list[0]
             if user_input_list[1] == 'total':
-                return covid19_database.make_queries(user_input_list[0], None, None)
-            else:
-
-
+                return covid19_database.make_queries(datatype, "", "")
+            elif len(user_input_list) == 2:
+                return covid19_database.make_queries(datatype, get_state(user_input_list), "")
+            elif len(user_input_list) > 4:
+                return covid19_database.make_queries(datatype, get_state(user_input_list), get_county(user_input_list))
+    return "Incorrect Syntax, try again"
 
 def get_state(user_input_list) -> str:
     state = user_input_list[2]
     if not len(state) == 2:
-        return 'False'
+        return 'State input should be in Abbreviated form (i.e. VT)'
     return state
+
 
 def get_county(user_input_list) -> str:
     county = ""
-    for i in range (4, len(user_input_list)):
+    for i in range(4, len(user_input_list)):
         if i == 4:
             county = user_input_list[i]
         else:
             county += " "+user_input_list[i]
+    if county == "":
+        return ""
     return county
+
 
 if __name__ == '__main__':
     running = True #Variable to hold whether the user wants to be playing.
 
     print("Welcome to our COVID data searcher!")
-    print('Type "load data" if this is your first time running this.')
+    print('Type "load" if this is your first time running this.')
     print('Type "help" for a how-to guide on structuring queries.\n')
     loaded = False
     while running:
