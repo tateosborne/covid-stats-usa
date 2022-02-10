@@ -112,11 +112,11 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # state
     elif county is None:
-        formatted_query = "SELECT " + datatype + " FROM state_data WHERE state=" + state
+        formatted_query = "SELECT " + datatype + " FROM state_data WHERE state_name=" + state
 
     # county
     elif state is not None and county is not None:
-        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state=" + state + " AND county=" + county
+        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state_name=" + state + " AND county=" + county
 
     return retrieve_data(formatted_query)
 
