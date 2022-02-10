@@ -18,11 +18,13 @@ def get_input(user_input_list, loaded):
         if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
 
 
-def get_state(user_input_data):
-    if not len(user_input_data[2]) == 2:
-        return
+def get_state(user_input_list) -> str:
+    state = user_input_list[2]
+    if not len(state) == 2:
+        return 'False'
+    return state
 
-def get_county(user_input_list):
+def get_county(user_input_list) -> str:
     county = ""
     for i in range (4, len(user_input_list)):
         if i == 4:

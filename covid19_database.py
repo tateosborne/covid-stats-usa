@@ -102,7 +102,7 @@ def insert_values():
 
 
 # this function will take in the input arguments from parser and format into a SQL query
-def make_queries(state: str, county: str, cases: int) -> str:
+def make_queries(datatype: str, state: str, county: str) -> str:
 
     formatted_query = ""
 
@@ -110,15 +110,16 @@ def make_queries(state: str, county: str, cases: int) -> str:
         formatted_query = "SELECT " + datatype + " FROM states_data"
 
     elif county is None:
-        formatted_query = "SELECT " + datatype + "FROM state_data"
+        formatted_query = "SELECT " + datatype + " FROM state_data WHERE state=" + state
 
+    elif state is not None and county is not None:
+        formatted_query = "SELECT " + datatype + " FROM county_data WHERE state=" + state + " AND county=" + county
 
+    return retrieve_data(formatted_query)
 
 
 # use formatted_query to gather the data to print to console
 def retrieve_data(query: str) -> str:
-
-    db_file = "test_database"
     # conn represents the database
     conn = sqlite3.connect(db_file)
     print(sqlite3.version)
