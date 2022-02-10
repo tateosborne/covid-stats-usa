@@ -7,13 +7,13 @@ def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
     county = ""
-    # TODO process help
-    if user_input_list[0] == 'load' and user_input_list[1] == 'data':
+    if user_input_list[0] == 'load':
         if exists('covid_data.db'):
             print('Loading data...')
+            covid19_database.create_connection()
             covid19_database.insert_values()
-            print('Done!')
             loaded = True
+            return "Done"
     elif user_input_list[0] == 'quit':
         print('Quitting')
         quit()
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     running = True #Variable to hold whether the user wants to be playing.
 
     print("Welcome to our COVID data searcher!")
-    print('Type "load data" if this is your first time running this.')
+    print('Type "load" if this is your first time running this.')
     print('Type "help" for a how-to guide on structuring queries.\n')
     loaded = False
     while running:
