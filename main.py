@@ -7,7 +7,7 @@ def get_input(user_input_list, loaded):
     datatype = ""
     state = ""
     county = ""
-    ## TODO process help
+    # TODO process help
     if user_input_list[0] == 'load' and user_input_list[1] == 'data':
         if exists('covid_data.db'):
             print('Loading data...')
@@ -18,12 +18,15 @@ def get_input(user_input_list, loaded):
         print('Quitting')
         quit()
     elif loaded:
-        if (user_input_list[0] in 'cases', 'deaths', 'mortality') & (exists(user_input_list[1])):
+        if (user_input_list[0] in {'cases', 'deaths', 'mortality'}) & (exists(user_input_list[1])):
+            datatype = user_input_list[0]
             if user_input_list[1] == 'total':
-                return covid19_database.make_queries(user_input_list[0], None, None)
+                return covid19_database.make_queries(datatype, "", "")
             elif len(user_input_list) == 2:
-
-
+                return covid19_database.make_queries(datatype, get_state(user_input_list), "")
+            elif len(user_input_list) > 4:
+                return covid19_database.make_queries(datatype, get_state(user_input_list), get_county(user_input_list))
+    return "Incorrect Syntax, try again"
 
 def get_state(user_input_list) -> str:
     state = user_input_list[2]
@@ -31,18 +34,18 @@ def get_state(user_input_list) -> str:
         return 'State input should be in Abbreviated form (i.e. VT)'
     return state
 
+
 def get_county(user_input_list) -> str:
     county = ""
-    for i in range (4, len(user_input_list)):
+    for i in range(4, len(user_input_list)):
         if i == 4:
             county = user_input_list[i]
         else:
             county += " "+user_input_list[i]
     if county == "":
-        return None
+        return ""
     return county
 
-def get_output():
 
 if __name__ == '__main__':
     running = True #Variable to hold whether the user wants to be playing.
