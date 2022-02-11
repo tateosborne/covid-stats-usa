@@ -120,7 +120,6 @@ def make_queries(datatype: str, state: str, county: str) -> str:
         formatted_query.encode('unicode_escape')
     return retrieve_data(formatted_query)
 
-
 # use formatted_query to gather the data to print to console
 def retrieve_data(query: str) -> str:
     db_file = "covid_data.db"
