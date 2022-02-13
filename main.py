@@ -3,7 +3,7 @@ import covid19_database
 from os.path import exists
 
 
-def get_input(user_input_list, loaded):
+def get_input(user_input_list):
     datatype = ""
     state = ""
     county = ""
@@ -14,7 +14,6 @@ def get_input(user_input_list, loaded):
             print('Loading data...')
             covid19_database.create_connection()
             covid19_database.insert_values()
-            loaded = True
             return "Done"
         else:
             return "Database is already Loaded"
@@ -65,16 +64,19 @@ def get_county(user_input_list) -> str:
         return ""
     return county
 
+
+def read_output(output: str):
+    print()
+
 if __name__ == '__main__':
     running = True  # Variable to hold whether the user wants to be playing.
 
     print("Welcome to our COVID data searcher!")
     print('Type "load" if this is your first time running this.')
     print('Type "help" for a how-to guide on structuring queries.\n')
-    loaded = False
     while running:
         user_input = input('Enter your Query: ')
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
-        print(get_input(user_input_list, loaded))
+        print(get_input(user_input_list))
 

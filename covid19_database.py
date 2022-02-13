@@ -108,7 +108,7 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # Total
     if state == "" and county == "":
-        formatted_query = f"SELECT '{datatype}' FROM states_data"
+        formatted_query = f"SELECT '{datatype}' FROM state_data"
 
     # state
     elif county == "":
