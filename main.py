@@ -64,8 +64,23 @@ def get_county(user_input_list) -> str:
     return county
 
 
-def read_output(output: str):
-    print()
+def read_output(user_input_list: list, output: int) -> str:
+    length = len(user_input_list)
+
+    # handles total return values
+    if user_input_list[1] == 'total':
+        return 'Total '+user_input_list[0]+' nationwide = '+str(output)
+
+    # handles state return values
+    elif length == 3:
+        return 'Total '+user_input_list[0]+' in the state of '+user_input_list[2]+" = "+str(output)
+
+    # handles county return values
+    elif length > 4:
+        return 'Total '+user_input_list[0]+' in '+get_county(user_input_list)+", "+user_input_list[2]+' = '+str(output)
+
+    return "something messed up somewhere"
+
 
 if __name__ == '__main__':
     running = True  # Variable to hold whether the user wants to be playing.
@@ -77,5 +92,11 @@ if __name__ == '__main__':
         user_input = input('Enter your Query: ')
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
-        print(get_input(user_input_list))
+
+        output = get_input(user_input_list)
+
+        if type(output) == str and not output[len(output)-1] == "%":
+            print(output)
+        else:
+            print(read_output(user_input_list, output))
         ##covid19_database.print_db()
