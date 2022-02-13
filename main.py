@@ -79,4 +79,4 @@ if __name__ == '__main__':
         # turns user input to lowercase and splits along spaces
         user_input_list = user_input.lower().split(" ")
         print(get_input(user_input_list))
-
+        ##covid19_database.print_db()

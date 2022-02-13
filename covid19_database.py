@@ -114,11 +114,12 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # county
     elif state != "" and county != "":
+        county = county[0].upper() + (county[1:]) #Make first character upper
         formatted_query = f"SELECT {datatype} FROM county_data WHERE state_name='{state}' AND county='{county}'"
     return retrieve_data(formatted_query)
 
 # use formatted_query to gather the data to print to console
-def retrieve_data(query: str) -> str:
+def retrieve_data(query: str) -> int:
     db_file = "covid_data.db"
     # conn represents the database
     conn = sqlite3.connect(db_file)
@@ -128,13 +129,14 @@ def retrieve_data(query: str) -> str:
     c = conn.cursor()
     c.execute(query)
 
-    data_str = ""
+    data_int = 0
     data_list = c.fetchall()
     for d in data_list:
-        data_str += (str(d) + " ")
+        d_int = d[0]
+        data_int += d_int
     c.close()
 
-    return data_str
+    return data_int
 
 
 def print_db():
