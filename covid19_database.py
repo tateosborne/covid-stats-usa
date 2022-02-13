@@ -19,7 +19,7 @@ def create_connection():
         # Create the table of county statistics
         # Table parameters are county, state, deaths
         c.execute('''
-            CREATE TABLE IF NOT EXISTS County_Data 
+            CREATE TABLE IF NOT EXISTS county_data 
             ([county] TEXT, [state_name] TEXT, [cases] INTEGER, [deaths] INTEGER)
         ''')
 
@@ -66,8 +66,7 @@ def insert_values():
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO county_data (county, state_name, cases, deaths) 
-                    VALUES (?, ?, ?, ?)'''
+            insert_with_param = '''INSERT INTO county_data (county, state_name, cases, deaths) VALUES (?, ?, ?, ?)'''
             data_tuple = (county_formatted, state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
             conn.commit()
@@ -83,8 +82,7 @@ def insert_values():
             state_formatted = split_str[0]
             cases_formatted = int(split_str[1])
             deaths_formatted = int(split_str[2])
-            insert_with_param = '''INSERT INTO state_data (state_name, cases, deaths)
-                        VALUES (?, ?, ?)'''
+            insert_with_param = '''INSERT INTO state_data (state_name, cases, deaths) VALUES (?, ?, ?)'''
             data_tuple = (state_formatted, cases_formatted, deaths_formatted)
             c.execute(insert_with_param, data_tuple)
             conn.commit()
@@ -108,16 +106,15 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # Total
     if state == "" and county == "":
-        formatted_query = f"SELECT '{datatype}' FROM state_data"
+        formatted_query = f"SELECT {datatype} FROM state_data"
 
     # state
     elif county == "":
-        formatted_query = f"SELECT '{datatype}' FROM state_data WHERE state_name='{state}'"
+        formatted_query = f"SELECT {datatype} FROM state_data WHERE state_name='{state}'"
 
     # county
     elif state != "" and county != "":
-        formatted_query = f"SELECT '{datatype}' FROM county_data WHERE state_name='{state}' AND county='{county}'"
-        formatted_query.encode('unicode_escape')
+        formatted_query = f"SELECT {datatype} FROM county_data WHERE state_name='{state}' AND county='{county}'"
     return retrieve_data(formatted_query)
 
 # use formatted_query to gather the data to print to console
@@ -145,5 +142,15 @@ def print_db():
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM County_Data")
+    cur.execute("SELECT * FROM county_data")
+    output = cur.fetchall()
+    for i in range(len(output)):
+        print(output[i])
+def test_query():
+    db_file = "covid_data.db"
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
+
+    cur.execute('SELECT "cases" FROM state_data WHERE state_name="VT"')
+    output_string = cur.fetchall()
     print(cur.fetchall())
