@@ -103,8 +103,9 @@ def insert_values():
 def make_queries(datatype: str, state: str, county: str) -> str:
 
     formatted_query = ""
-
     # Total
+    if datatype == 'mortality':
+        datatype = 'cases, deaths'
     if state == "" and county == "":
         formatted_query = f"SELECT {datatype} FROM state_data"
 
@@ -119,7 +120,7 @@ def make_queries(datatype: str, state: str, county: str) -> str:
     return retrieve_data(formatted_query)
 
 # use formatted_query to gather the data to print to console
-def retrieve_data(query: str) -> int:
+def retrieve_data(query: str) -> str:
     db_file = "covid_data.db"
     # conn represents the database
     conn = sqlite3.connect(db_file)
@@ -131,12 +132,19 @@ def retrieve_data(query: str) -> int:
 
     data_int = 0
     data_list = c.fetchall()
-    for d in data_list:
-        d_int = d[0]
-        data_int += d_int
-    c.close()
+    if len(data_list) == 0:
+        return "No data for request found"
+    elif len(data_list[0]) == 2:
+        d = data_list[0]
+        return f'{d[1]/d[0]:.4f}' + "%"
+    else:
+        for d in data_list:
+            d_int = d[0]
+            data_int += d_int
+        c.close()
+        return str(data_int)
 
-    return data_int
+
 
 
 def print_db():

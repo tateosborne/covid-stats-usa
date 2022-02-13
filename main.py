@@ -21,9 +21,9 @@ def get_input(user_input_list):
         print('Quitting')
         quit()
     elif user_input_list[0] == 'help':
-        system_calls.help_user()
+        return system_calls.help_user()
     elif user_input_list[0] == 'date':
-        print("Our data was collected on 2/18/21")
+        return "Our data was collected on 2/18/21"
 
     elif len(user_input_list) >= 1:
         if user_input_list[0] in {'cases', 'deaths', 'mortality'}:
@@ -34,7 +34,7 @@ def get_input(user_input_list):
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), "")
             elif len(user_input_list) > 4:
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), get_county(user_input_list))
-    return "Incorrect Syntax, try again"
+    return "Incorrect Syntax, type 'help' for list of possible commands"
 
 
 # checks to see if state is formatted correctly, then separates for ease of use
@@ -42,8 +42,7 @@ def get_state(user_input_list) -> str:
     state = user_input_list[2]
     # checks length of state name to ensure validity
     if not len(state) == 2:
-        print("State input should be in abbreviated form (i.e. VT)")
-        return ""
+        return "State input should be in abbreviated form (i.e. VT)"
     return state
 
 
