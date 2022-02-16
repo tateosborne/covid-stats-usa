@@ -62,7 +62,7 @@ def insert_values():
             line = line.rstrip("\n")
             line = line.rstrip(line[-1])
             split_str = line.split(',')
-            county_formatted = split_str[0]
+            county_formatted = split_str[0].lower()
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
             deaths_formatted = int(split_str[2])

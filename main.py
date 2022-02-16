@@ -5,8 +5,6 @@ from os.path import exists
 
 def get_input(user_input_list):
     datatype = ""
-    state = ""
-    county = ""
 
     # system calls
     if user_input_list[0] == 'load':
@@ -54,9 +52,9 @@ def get_county(user_input_list) -> str:
     for i in range(4, len(user_input_list)):
         # for first part of county, no space for separation, but there is for rest
         if i == 4:
-            county = user_input_list[i][0].upper() + user_input_list[i][1:]
+            county = user_input_list[i]
         else:
-            county += " " + user_input_list[i][0].upper() + user_input_list[i][1:]
+            county += " " + user_input_list[i]
     # case for invalid county entry
     if county == "":
         print("Error: Invalid county specified")
