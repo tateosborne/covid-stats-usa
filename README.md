@@ -22,6 +22,8 @@ The syntax of the user input is fairly strict; it must follow the format of the 
 - `state abbreviation`: the two-letter abbreviation of any state in the United States
 - `county name`: the county name; do not include the word "county"
 
+The input `[datatype] total` returns the total of whatever the specified datatype is.
+
 _Note that the user input is not case-sensitive_
 
 There are extra commands, such as the following:
