@@ -23,7 +23,7 @@ def get_input(user_input_list):
     elif user_input_list[0] == 'date':
         return "Our data was collected on 2/18/21"
     elif user_input_list[0] == 'source':
-        return "Our data is from "
+        return "All data is from: https://github.com/nytimes/covid-19-data"
 
     elif len(user_input_list) >= 1:
         if user_input_list[0] in {'cases', 'deaths', 'mortality'}:
