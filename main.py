@@ -16,9 +16,9 @@ def get_input(user_input_list):
             covid19_database.insert_values()
             return "Done"
         else:
-            return "Database is already Loaded"
+            return "Error: Database is already Loaded"
     elif user_input_list[0] == 'quit':
-        print('Quitting')
+        print('Quitting...')
         quit()
     elif user_input_list[0] == 'help':
         return system_calls.help_user()
@@ -34,7 +34,7 @@ def get_input(user_input_list):
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), "")
             elif len(user_input_list) > 4:
                 return covid19_database.make_queries(datatype, get_state(user_input_list).upper(), get_county(user_input_list))
-    return "Incorrect Syntax, type 'help' for list of possible commands"
+    return "Error: Incorrect Syntax, type 'help' for list of possible commands"
 
 
 # checks to see if state is formatted correctly, then separates for ease of use
@@ -42,7 +42,7 @@ def get_state(user_input_list) -> str:
     state = user_input_list[2]
     # checks length of state name to ensure validity
     if not len(state) == 2:
-        return "State input should be in abbreviated form (i.e. VT)"
+        return "Error: State input should be in abbreviated form (i.e. VT)"
     return state
 
 
@@ -54,12 +54,12 @@ def get_county(user_input_list) -> str:
     for i in range(4, len(user_input_list)):
         # for first part of county, no space for separation, but there is for rest
         if i == 4:
-            county = user_input_list[i]
+            county = user_input_list[i][0].upper() + user_input_list[i][1:]
         else:
-            county += " " + user_input_list[i]
+            county += " " + user_input_list[i][0].upper() + user_input_list[i][1:]
     # case for invalid county entry
     if county == "":
-        print("Invalid county specified")
+        print("Error: Invalid county specified")
         return ""
     return county
 
@@ -67,26 +67,27 @@ def get_county(user_input_list) -> str:
 def read_output(user_input_list: list, output: int) -> str:
     length = len(user_input_list)
 
-    # handles total return values
+    # handles total commands
     if user_input_list[1] == 'total':
         return 'Total '+user_input_list[0]+' nationwide = '+str(output)
 
-    # handles state return values
+    # handles state commands
     elif length == 3:
-        return 'Total '+user_input_list[0]+' in the state of '+user_input_list[2]+" = "+str(output)
+        return 'Total '+user_input_list[0]+' in the state of '+user_input_list[2].upper()+" = "+str(output)
 
-    # handles county return values
+    # handles county commands
     elif length > 4:
-        return 'Total '+user_input_list[0]+' in '+get_county(user_input_list)+", "+user_input_list[2]+' = '+str(output)
+        return 'Total '+user_input_list[0]+' in '+get_county(user_input_list)+' county, '+\
+               user_input_list[2].upper()+' = '+str(output)
 
-    return "something messed up somewhere"
+    return "Error: something messed up somewhere, text 2035008476 for help (please dont, jack will be mad)"
 
 
 if __name__ == '__main__':
     running = True  # Variable to hold whether the user wants to be playing.
 
     print("Welcome to our COVID data searcher!")
-    print('Type "load" if this is your first time running this.')
+    print('Type "load" or "load data" if this is your first time running this software.')
     print('Type "help" for a how-to guide on structuring queries.\n')
     while running:
         user_input = input('Enter your Query: ')
@@ -95,7 +96,8 @@ if __name__ == '__main__':
 
         output = get_input(user_input_list)
 
-        if type(output) == str and not output[len(output)-1] == "%":
+        # checks output to see if error message or actual output
+        if not output[0].isdigit():
             print(output)
         else:
             print(read_output(user_input_list, output))

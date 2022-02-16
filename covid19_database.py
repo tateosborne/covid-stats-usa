@@ -115,7 +115,8 @@ def make_queries(datatype: str, state: str, county: str) -> str:
 
     # county
     elif state != "" and county != "":
-        county = county[0].upper() + (county[1:]) #Make first character upper
+        # Note: the below line only works if the county is one word long, get_county in main.py fixes this issue
+        # county = county[0].upper() + (county[1:]) #Make first character upper
         formatted_query = f"SELECT {datatype} FROM county_data WHERE state_name='{state}' AND county='{county}'"
     return retrieve_data(formatted_query)
 
