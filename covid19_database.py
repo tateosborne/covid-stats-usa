@@ -62,7 +62,7 @@ def insert_values():
             line = line.rstrip("\n")
             line = line.rstrip(line[-1])
             split_str = line.split(',')
-            county_formatted = split_str[0]
+            county_formatted = split_str[0].lower()
             state_formatted = split_str[1]
             cases_formatted = int(split_str[2])
             deaths_formatted = int(split_str[2])
@@ -126,7 +126,9 @@ def retrieve_data(query: str) -> str:
     # conn represents the database
     conn = sqlite3.connect(db_file)
     # print(sqlite3.version)
-
+    for c in query:
+        if (c == '%', ';'):
+            return "Please stop trying to break our code Jason, we're on to you"
     # Retrieve data from the desired table
     c = conn.cursor()
     c.execute(query)
