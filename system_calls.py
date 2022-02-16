@@ -19,6 +19,6 @@ def help_user():
     print('Type "date" to show when our data was collected.')
     # maybe we want this^ command to be named source, then show the NYT website and the date?
     print('Type "load data" to load the data. NOTE: You only need to do this once per computer.')
-    print('Type "help" to see this all again.')
+    return 'Type "help" to see this all again.'
 
 # help_user()
