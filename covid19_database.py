@@ -127,7 +127,7 @@ def retrieve_data(query: str) -> str:
     conn = sqlite3.connect(db_file)
     # print(sqlite3.version)
     for c in query:
-        if (c == '%', ';'):
+        if (c == '%'):
             return "Please stop trying to break our code Jason, we're on to you"
     # Retrieve data from the desired table
     c = conn.cursor()
