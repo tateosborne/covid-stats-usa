@@ -1,6 +1,6 @@
 # Warm-Up Project, Group 5
 ###   Jack McCallum, Noah Jacobson, Josh Baker, Tate Osborne
-###### CS 205 · _February 16, 2022_
+#### CS 205 · _February 16, 2022_
 
 For the warm-up project in CS205, we decided to model our project
 around United States COVID-19 data. The data we use was collected on February 18, 2021.
